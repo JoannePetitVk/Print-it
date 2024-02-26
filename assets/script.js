@@ -94,11 +94,27 @@ function updateSlide(index) {
 // Permet de naviguer entre les diapositives d'un carrousel en avant ou en arrière
 function changeSlides(direction) {
 	if (direction === 'next') {
-		currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+		// Augmente l'index de 1 et vérifie si cela dépasse la longueur du tableau
+		if (currentSlideIndex + 1 >= slides.length) {
+			// Si oui, revient au début
+			currentSlideIndex = 0;
+		} else {
+			// Sinon, passe simplement à la diapositive suivante
+			currentSlideIndex++;
+		}
 	} else if (direction === 'prev') {
-		currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+		// Diminue l'index de 1 et vérifie si cela devient négatif
+		if (currentSlideIndex - 1 < 0) {
+			// Si oui, va à la dernière diapositive
+			currentSlideIndex = slides.length - 1;
+		} else {
+			// Sinon, passe simplement à la diapositive précédente
+			currentSlideIndex--;
+		}
 	}
+	// Met à jour la diapositive affichée
 	updateSlide(currentSlideIndex);
 }
+
 
 
